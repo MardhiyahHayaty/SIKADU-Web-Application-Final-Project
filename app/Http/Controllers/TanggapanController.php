@@ -75,7 +75,7 @@ class TanggapanController extends Controller
                 ]));
                 try {
                     Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
-                } catch (Throwable $e) {
+                } catch (\Exception $e) {
                     Log::error('Error Send Email', ['error' => $e]);
                 }
 
@@ -114,7 +114,7 @@ class TanggapanController extends Controller
 
                 try {
                     Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
-                } catch (Throwable $e) {
+                } catch (\Exception $e) {
                     Log::error('Error Send Email', ['error' => $e]);
                 }
 
