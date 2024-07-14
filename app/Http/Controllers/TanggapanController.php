@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Events\TanggapanBaru;
 use App\Events\TanggapanUpdated;
+use App\Mail\SendEmail;
 use App\Models\LogTanggapan;
+use App\Models\Masyarakat;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
@@ -12,6 +14,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class TanggapanController extends Controller
@@ -32,6 +35,7 @@ class TanggapanController extends Controller
             // Mengambil data pengaduan berdasarkan id
             $pengaduans = Pengaduan::findOrFail($request->id_pengaduan);
 
+            $masyarakat = Masyarakat::where('nik', $pengaduans->nik)->first();
             // Mengambil data tanggapan berdasarkan id_pengaduan
             $tanggapans = Tanggapan::where('id_pengaduan', $request->id_pengaduan)->first();
 
@@ -69,6 +73,11 @@ class TanggapanController extends Controller
                     'nik' => $pengaduans->nik,
                     'message' => 'Tanggapan Anda telah diperbarui'
                 ]));
+                try {
+                    Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
+                } catch (Throwable $e) {
+                    Log::error('Error Send Email', ['error' => $e]);
+                }
 
                 DB::commit();
                 return response()->json(['message' => 'Berhasil Dikirim!', 'status_pengaduan' => $pengaduans->status_pengaduan], 200);
@@ -102,6 +111,12 @@ class TanggapanController extends Controller
                     'message' => 'Pengaduan Anda Ditanggapi'
                 ]));
                 Log::info('Tanggapan created', ['tanggapan' => $tanggapans]);
+
+                try {
+                    Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
+                } catch (Throwable $e) {
+                    Log::error('Error Send Email', ['error' => $e]);
+                }
 
                 DB::commit();
                 return response()->json(['message' => 'Berhasil Dikirim!', 'status_pengaduan' => $pengaduans->status_pengaduan], 200);
