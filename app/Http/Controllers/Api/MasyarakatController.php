@@ -41,6 +41,9 @@ class MasyarakatController extends Controller
             'telp_masyarakat' => 'required',
             'kata_sandi_masyarakat' => 'required',
             'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'tgl_lahir_masyarakat' => 'required',
+            'jenis_kelamin_masyarakat' => 'required',
+            'alamat_masyarakat' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +56,9 @@ class MasyarakatController extends Controller
             'email_masyarakat' => $request->email_masyarakat,
             'telp_masyarakat' => $request->telp_masyarakat,
             'kata_sandi_masyarakat' => Hash::make($request->kata_sandi_masyarakat),
+            'tgl_lahir_masyarakat' => $request->tgl_lahir_masyarakat,
+            'jenis_kelamin_masyarakat' => $request->jenis_kelamin_masyarakat,
+            'alamat_masyarakat' => $request->alamat_masyarakat,
         ];
 
         if ($request->hasFile('foto_masyarakat')) {
@@ -88,6 +94,9 @@ class MasyarakatController extends Controller
             'email_masyarakat' => 'required|email',
             'telp_masyarakat' => 'required',
             'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tgl_lahir_masyarakat' => 'required',
+            'jenis_kelamin_masyarakat' => 'required',
+            'alamat_masyarakat' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -98,6 +107,9 @@ class MasyarakatController extends Controller
             'nama_masyarakat' => $request->nama_masyarakat,
             'email_masyarakat' => $request->email_masyarakat,
             'telp_masyarakat' => $request->telp_masyarakat,
+            'tgl_lahir_masyarakat' => $request->tgl_lahir_masyarakat,
+            'jenis_kelamin_masyarakat' => $request->jenis_kelamin_masyarakat,
+            'alamat_masyarakat' => $request->alamat_masyarakat,
         ];
 
         if ($request->filled('kata_sandi_masyarakat')) {
