@@ -22,6 +22,9 @@ class Masyarakat extends Authenticatable
         'telp_masyarakat',
         'kata_sandi_masyarakat',
         'foto_masyarakat',
+        'tgl_lahir_masyarakat',
+        'jenis_kelamin_masyarakat',
+        'alamat_masyarakat',
     ];
 
     protected $hidden = [
