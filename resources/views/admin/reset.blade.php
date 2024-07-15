@@ -38,14 +38,13 @@
                 <div class="card" style="border-radius: 50px; padding: 40px; margin-top: 20%; margin-bottom: 20%; box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);">
                     <div class="card-body">
                         <h6 class="text-center text-black" style="margin-bottom: 40px;">Lupa Kata Sandi</h6>
-                        <form action="{{ route('password.email') }}" method="POST">
+                        <form method="POST" action="{{ route('password.update') }}">
                             @csrf
-                            <div class="form-group">
-                                <label for="name" class="control-label">Alamat Email</label>
-                                <input type="email" name="email" placeholder="Alamat Email Petugas" class="form-control mb-5">
-                            </div>
-                            <button type="submit" class="btn btn-purple">Kirim Tautan Reset Kata Sandi</button>
-                            
+                            <input type="hidden" name="token" value="{{ $token }}">
+                            <input type="email" name="email" value="{{ $email ?? old('email') }}" required>
+                            <input type="password" name="password" required>
+                            <input type="password" name="password_confirmation" required>
+                            <button type="submit">Reset Kata Sandi</button>
                         </form>
                     </div>
                     @if (Session::has('pesan'))
