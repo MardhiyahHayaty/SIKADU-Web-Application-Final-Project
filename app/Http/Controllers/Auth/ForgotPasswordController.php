@@ -34,8 +34,8 @@ class ForgotPasswordController extends Controller
 
         // Memberikan respons berdasarkan status pengiriman email
         return $response == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($response))
-                    : back()->withErrors(['email' => __($response)]);
+            ? back()->with('status', __($response))
+            : back()->withErrors(['email' => __($response)]);
     }
 
     // Atur broker untuk proses reset password

@@ -52,7 +52,7 @@
                                 <input type="password" name="kata_sandi_petugas" placeholder="Kata Sandi Petugas" class="form-control mb-5">
                             </div>
                             <button type="submit" class="btn btn-purple">MASUK</button>
-                           
+                            
                         </form>
                     </div>
                     @if (Session::has('pesan'))
@@ -61,11 +61,11 @@
                     </div>
                     @endif
 
-                    <!-- Link lupa kata sandi 
+                    <!-- Link lupa kata sandi -->
                     <p class="text-center mt-3">
                             <a href="{{ route('password.request') }}">Lupa kata sandi?</a>
                         </p>
-                    -->
+                    
                 </div>
             </div>
         </div>

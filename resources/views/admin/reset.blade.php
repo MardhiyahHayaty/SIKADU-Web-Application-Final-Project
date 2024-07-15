@@ -12,16 +12,14 @@
 <body>
     <h2>Reset Kata Sandi</h2>
 
-    <!-- resources/views/auth/passwords/reset.blade.php -->
-<form method="POST" action="{{ route('password.update') }}">
-    @csrf
-    <input type="hidden" name="token" value="{{ $token }}">
-    <input type="email" name="email" value="{{ $email ?? old('email') }}" required>
-    <input type="password" name="password" required>
-    <input type="password" name="password_confirmation" required>
-    <button type="submit">Reset Kata Sandi</button>
-</form>
-
+        <form method="POST" action="{{ route('password.update') }}">
+        @csrf
+        <input type="hidden" name="token" value="{{ $token }}">
+        <input type="email" name="email" value="{{ $email ?? old('email') }}" required>
+        <input type="password" name="password" required>
+        <input type="password" name="password_confirmation" required>
+        <button type="submit">Reset Kata Sandi</button>
+    </form>
 </body>
 
 </html>
