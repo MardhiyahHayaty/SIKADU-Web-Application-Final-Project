@@ -91,10 +91,10 @@ Route::middleware(['isGuest'])->group(function () {
 
     Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    //Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-    //Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
-    Route::post('forgot-password', [ForgotPasswordMasyarakatController::class, 'sendResetLinkEmail'])->name('password.email');
-    Route::post('reset-password', [ResetPasswordMasyarakatController::class, 'reset'])->name('password.update');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+    //Route::post('forgot-password', [ForgotPasswordMasyarakatController::class, 'sendResetLinkEmail'])->name('password.email');
+    //Route::post('reset-password', [ResetPasswordMasyarakatController::class, 'reset'])->name('password.update');
     
 });
 
