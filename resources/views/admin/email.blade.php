@@ -42,7 +42,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name" class="control-label">Alamat Email</label>
-                                <input type="email" name="email_petugas" placeholder="Alamat Email Petugas" class="form-control mb-5">
+                                <input type="email" name="email" placeholder="Alamat Email Petugas" class="form-control mb-5">
                             </div>
                             <button type="submit" class="btn btn-purple">Kirim Tautan Reset Kata Sandi</button>
                             

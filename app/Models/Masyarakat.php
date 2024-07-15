@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Masyarakat extends Authenticatable
@@ -14,11 +15,11 @@ class Masyarakat extends Authenticatable
     protected $table = 'masyarakats';
     protected $primaryKey = 'nik'; // Menentukan 'nik' sebagai primary key
     
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $fillable = [
         'nik',
         'nama_masyarakat',
-        'email_masyarakat',
+        'email',
         'telp_masyarakat',
         'kata_sandi_masyarakat',
         'foto_masyarakat',

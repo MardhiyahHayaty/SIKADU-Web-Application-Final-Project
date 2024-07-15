@@ -17,7 +17,7 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        $email_petugas = Petugas::where('email_petugas', $request->email_petugas)->first();
+        $email_petugas = Petugas::where('email', $request->email_petugas)->first();
 
         if (!$email_petugas) {
             return redirect()->back()->with(['pesan' => 'Alamat email atau kata sandi tidak sesuai!']);
@@ -29,7 +29,7 @@ class AdminController extends Controller
             return redirect()->back()->with(['pesan' => 'Alamat email atau kata sandi tidak sesuai!']);
         }
 
-        $auth = Auth::guard('admin')->attempt(['email_petugas' => $request->email_petugas, 'password' => $request->kata_sandi_petugas]);
+        $auth = Auth::guard('admin')->attempt(['email' => $request->email_petugas, 'password' => $request->kata_sandi_petugas]);
 
         if ($auth) {
             return redirect()->route('dashboard.index');

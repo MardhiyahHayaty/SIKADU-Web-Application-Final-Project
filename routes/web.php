@@ -3,7 +3,9 @@
 use App\Http\Controllers\AdminChatController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordMasyarakatController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordMasyarakatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PengaduanController;
@@ -88,10 +90,15 @@ Route::middleware(['isGuest'])->group(function () {
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login');
 
     Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+    //Route::post('forgot-password', [ForgotPasswordMasyarakatController::class, 'sendResetLinkEmail'])->name('password.email');
+    //Route::post('reset-password', [ResetPasswordMasyarakatController::class, 'reset'])->name('password.update');
+    
 });
+
+
 
 
 

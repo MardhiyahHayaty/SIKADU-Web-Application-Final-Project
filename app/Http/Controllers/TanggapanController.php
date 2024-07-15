@@ -74,7 +74,7 @@ class TanggapanController extends Controller
                     'message' => 'Tanggapan Anda telah diperbarui'
                 ]));
                 try {
-                    Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
+                    Mail::to($masyarakat->email)->send(new SendEmail($tanggapans, $masyarakat));
                 } catch (\Exception $e) {
                     Log::error('Error Send Email', ['error' => $e]);
                 }
@@ -113,7 +113,7 @@ class TanggapanController extends Controller
                 Log::info('Tanggapan created', ['tanggapan' => $tanggapans]);
 
                 try {
-                    Mail::to($masyarakat->email_masyarakat)->send(new SendEmail($tanggapans, $masyarakat));
+                    Mail::to($masyarakat->email)->send(new SendEmail($tanggapans, $masyarakat));
                 } catch (\Exception $e) {
                     Log::error('Error Send Email', ['error' => $e]);
                 }

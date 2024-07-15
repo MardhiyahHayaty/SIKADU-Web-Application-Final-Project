@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Petugas;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Models\Masyarakat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordMasyarakatController extends Controller
 {
     // use SendsPasswordResetEmails;
 
@@ -18,36 +18,39 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    // Tampilkan form untuk meminta email reset password
-    public function showLinkRequestForm()
-    {
-        return view('admin.email');
-    }
-
     public function sendResetLinkEmail(Request $request)
     {
+        Log::info('Reset password request received:', $request->all());
+
         $request->validate(['email' => 'required|email']);
 
-        $petugas = Petugas::where('email', $request->email)->first();
-        // dd($petugas);
+        $masyarakat = Masyarakat::where('email', $request->email)->first();
+        //dd($masyarakat);
 
-        if (!$petugas) {
+        Log::info('Masyarakat found:', ['masyarakat' => $masyarakat]);
+
+        if (!$masyarakat) {
+            Log::warning('Masyarakat not found:', ['email' => $request->email]);
             throw ValidationException::withMessages([
-                'email' => ['Email petugas tidak ditemukan.'],
+                'email' => ['Email masyarakat tidak ditemukan.'],
             ]);
         }
 
         // Generate token and send reset link email
-        $status = Password::broker('petugass')->sendResetLink(
+        $status = Password::broker('masyarakats')->sendResetLink(
             ['email' => $request->email]
         );
 
+        Log::info('Password reset link status:', ['status' => $status]);
+
         if ($status === Password::RESET_LINK_SENT) {
+            Log::info('Password reset link sent:', ['email' => $request->email]);
             return response()->json(['message' => __($status)], 200);
         }
 
+        Log::error('Failed to send password reset link:', ['status' => $status]);
         throw ValidationException::withMessages([
-            'email_petugas' => [__($status)],
+            'email' => [__($status)],
         ]);
     }
 

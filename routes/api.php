@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordMasyarakatController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordMasyarakatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
@@ -36,4 +40,9 @@ Route::apiResource('/aspirasis', \App\Http\Controllers\Api\AspirasiController::c
 Route::post('login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [UserController::class, 'logout']);
 
+Route::post('forgot-password', [ForgotPasswordMasyarakatController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::post('reset-password', [ResetPasswordMasyarakatController::class, 'reset'])->name('password.update');
+
+//Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+//Route::post('reset-password', [ResetPasswordController::class, 'reset']);
 //Route::put('api/petugas/{id}', 'PetugasController@update');
