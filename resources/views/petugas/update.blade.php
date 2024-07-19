@@ -91,7 +91,7 @@
                 $('#post_id').val(response.data.id);
                 $('#nip_petugas-edit').val(response.data.nip_petugas);
                 $('#nama_petugas-edit').val(response.data.nama_petugas);
-                $('#email_petugas-edit').val(response.data.email_petugas);
+                $('#email_petugas-edit').val(response.data.email);
                 $('#telp_petugas-edit').val(response.data.telp_petugas);
                 $('#id_opd-edit').val(response.data.id_opd);
                 $('#kata_sandi_petugas-edit').val('');

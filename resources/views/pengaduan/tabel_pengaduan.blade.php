@@ -24,7 +24,7 @@
             <td></td>
             <td>{{ $loop->iteration + $startingNumber - 1 }}</td>
             <td>{{ $pengaduan-> masyarakat -> nama_masyarakat }}</td>
-            <td>{{ $pengaduan-> masyarakat -> email_masyarakat }}</td>
+            <td>{{ $pengaduan-> masyarakat -> email }}</td>
             <td>{{ $pengaduan-> jenis -> nama_jenis_aduan }}</td>
             <td>{{ $pengaduan-> lokasi_pengaduan}}</td>
             <td>{{ date("d M Y", strtotime($pengaduan->tgl_pengaduan)) }}</td>

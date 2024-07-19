@@ -58,6 +58,9 @@
         channel.bind('pengaduan-baru', function(data) {
             console.log('New notification received:', data);
             addNotification(data.pengaduan);
+
+            // Update unread notifications count
+            loadNotifications();
         });
     });
 
@@ -66,6 +69,8 @@
         var notifications = JSON.parse(localStorage.getItem('notifications')) || [];
         var notificationCount = document.getElementById('notificationCount');
 
+        // Saring entri yang tidak valid
+        notifications = notifications.filter(notification => notification.message);
         // Count unread notifications
         var unreadNotifications = notifications.filter(function(notification) {
             return !notification.read;
@@ -82,14 +87,16 @@
         // Clear existing notifications
         notificationList.innerHTML = '';
 
-        // Add notifications to the modal
+        // Tambahkan notifikasi ke modal
         notifications.forEach(function(notification) {
-            var newNotification = document.createElement('li');
-            newNotification.classList.add('list-group-item');
-            newNotification.innerHTML = '<strong>' + notification.message + '</strong><br>' + notification.permasalahan + '</strong><br>' + notification.tgl_pengaduan;
-            notificationList.appendChild(newNotification);
+            if (notification.message) {
+                var newNotification = document.createElement('li');
+                newNotification.classList.add('list-group-item');
+                newNotification.innerHTML = '<strong>' + notification.message + '</strong><br>' + notification.permasalahan + '<br>' + notification.tgl_pengaduan;
+                notificationList.appendChild(newNotification);
+            }
         });
-    }
+        }
 
     // Function to mark notifications as read
     function markNotificationsAsRead() {
@@ -117,7 +124,15 @@
     function addNotification(data) {
         var notifications = JSON.parse(localStorage.getItem('notifications')) || [];
         var notificationCount = document.getElementById('notificationCount');
+        
+        // Validasi data notifikasi
+        if (!data || !data.message || !data.permasalahan || !data.tgl_pengaduan) {
+            console.warn('Data notifikasi tidak valid:', data);
+            return;
+        }
 
+        // Tambahkan notifikasi baru ke array
+        data.read = false; // Pastikan notifikasi baru ditandai sebagai belum dibaca
         // Add new notification to the array
         notifications.unshift(data);
 

@@ -898,6 +898,21 @@
 									
 								</a>
 							</div>
+							<div class="menu-item">
+								<a class="menu-link {{ Request::is('masyarakat') ? 'active' : '' }}" href="https://app.crisp.chat/website/6ba5807b-56db-440a-b9b7-86559d056576/inbox/">
+									<span class="menu-icon">
+									
+										<!--begin::Svg Icon | path: icons/duotune/layouts/lay010.svg-->
+										<span class="svg-icon svg-icon-2">
+											<img src="assets/media/icons/live-chat.png" width="16" height="16" >
+										</span>
+										<!--end::Svg Icon-->
+									</span>
+									
+									<span class="menu-title">Live Chat</span>
+									
+								</a>
+							</div>
 							@endif
 						</div>
 						<!--end::Menu-->
@@ -1004,7 +1019,7 @@
 														<div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::guard('admin')->user()->nama_petugas }}
 															<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ Auth::guard('admin')->user()->level }}</span>
 														</div>
-														<a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::guard('admin')->user()->email_petugas }}</a>
+														<a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::guard('admin')->user()->email }}</a>
 													</div>
 													<!--end::Username-->
 												</div>

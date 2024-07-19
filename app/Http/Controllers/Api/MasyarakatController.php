@@ -37,13 +37,13 @@ class MasyarakatController extends Controller
         $validator = Validator::make($request->all(), [
             'nik' => 'required',
             'nama_masyarakat' => 'required',
-            'email_masyarakat' => 'required',
+            'email' => 'required',
             'telp_masyarakat' => 'required',
             'kata_sandi_masyarakat' => 'required',
             'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'tgl_lahir_masyarakat' => 'required',
-            'jenis_kelamin_masyarakat' => 'required',
-            'alamat_masyarakat' => 'required',
+            //'tgl_lahir_masyarakat' => 'required',
+            //'jenis_kelamin_masyarakat' => 'required',
+            //'alamat_masyarakat' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +53,7 @@ class MasyarakatController extends Controller
         $data = [
             'nik' => $request->nik,
             'nama_masyarakat' => $request->nama_masyarakat,
-            'email_masyarakat' => $request->email_masyarakat,
+            'email' => $request->email,
             'telp_masyarakat' => $request->telp_masyarakat,
             'kata_sandi_masyarakat' => Hash::make($request->kata_sandi_masyarakat),
             'tgl_lahir_masyarakat' => $request->tgl_lahir_masyarakat,
@@ -91,12 +91,12 @@ class MasyarakatController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_masyarakat' => 'required',
-            'email_masyarakat' => 'required|email',
+            'email' => 'required|email',
             'telp_masyarakat' => 'required',
             'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tgl_lahir_masyarakat' => 'required',
-            'jenis_kelamin_masyarakat' => 'required',
-            'alamat_masyarakat' => 'required',
+            //'tgl_lahir_masyarakat' => 'required',
+            //'jenis_kelamin_masyarakat' => 'required',
+            //'alamat_masyarakat' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -105,7 +105,7 @@ class MasyarakatController extends Controller
 
         $data = [
             'nama_masyarakat' => $request->nama_masyarakat,
-            'email_masyarakat' => $request->email_masyarakat,
+            'email' => $request->email,
             'telp_masyarakat' => $request->telp_masyarakat,
             'tgl_lahir_masyarakat' => $request->tgl_lahir_masyarakat,
             'jenis_kelamin_masyarakat' => $request->jenis_kelamin_masyarakat,

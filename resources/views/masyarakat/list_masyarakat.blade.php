@@ -59,7 +59,7 @@
                                     <td>{{ $loop->iteration + $startingNumber - 1 }}</td>
                                     <td>{{ $masyarakat-> nik }}</td>
                                     <td>{{ $masyarakat-> nama_masyarakat }}</td>
-                                    <td>{{ $masyarakat-> email_masyarakat }}</td>
+                                    <td>{{ $masyarakat-> email }}</td>
                                     <td>{{ $masyarakat-> telp_masyarakat }}</td>
                                     <td>
                                         <a href="{{url('storage/masyarakat/'.$masyarakat->foto_masyarakat)}}" data-lightbox="image-1" data-title="Foto Masyarakat">

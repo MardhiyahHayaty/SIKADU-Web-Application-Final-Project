@@ -84,7 +84,7 @@ use Illuminate\Support\Str;
                                     <td>{{ $loop->iteration + $startingNumber - 1 }}</td>
                                     <td>{{ $petugas-> nama_petugas }}</td>
                                     <td>{{ $petugas-> nip_petugas }}</td>
-                                    <td>{{ $petugas-> email_petugas }}</td>
+                                    <td>{{ $petugas-> email }}</td>
                                     <td>{{ $petugas-> telp_petugas }}</td>
                                     <td>{{ $petugas-> opd -> nama_opd }}</td>
 

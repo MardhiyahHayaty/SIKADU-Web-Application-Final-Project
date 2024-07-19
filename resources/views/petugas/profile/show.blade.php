@@ -112,7 +112,7 @@ use Illuminate\Support\Str;
 
                             <div class="form-group">
                                 <label for="name" class="control-label">Alamat Email</label>
-                                <input type="text" class="form-control" id="email_petugas-edit" value="{{ $petugasa->email_petugas }}" style="background-color: #EFF2F5;" readonly>
+                                <input type="text" class="form-control" id="email_petugas-edit" value="{{ $petugasa->email }}" style="background-color: #EFF2F5;" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Nomor Telepon</label>
