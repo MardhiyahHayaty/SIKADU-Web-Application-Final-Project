@@ -41,7 +41,7 @@
         <!--begin::Search bar-->
         <div class="col-md-10">
             <div class="form-group">
-                <input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Berita" style="width: 50%; margin-left: 30px"/>
+                <!--<input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Berita" style="width: 50%; margin-left: 30px"/>-->
             </div>
         </div>
         <div class="col-md-2">

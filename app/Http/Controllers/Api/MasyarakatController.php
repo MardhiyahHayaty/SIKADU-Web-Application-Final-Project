@@ -90,10 +90,10 @@ class MasyarakatController extends Controller
     public function update(Request $request, Masyarakat $masyarakat)
     {
         $validator = Validator::make($request->all(), [
-            'nama_masyarakat' => 'required',
-            'email' => 'required|email',
-            'telp_masyarakat' => 'required',
-            'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'nama_masyarakat' => 'required',
+            //'email' => 'required|email',
+            //'telp_masyarakat' => 'required',
+            'foto_masyarakat' => 'image|mimes:jpeg,png,jpg,gif,svg,heic|max:5120',
             //'tgl_lahir_masyarakat' => 'required',
             //'jenis_kelamin_masyarakat' => 'required',
             //'alamat_masyarakat' => 'required',

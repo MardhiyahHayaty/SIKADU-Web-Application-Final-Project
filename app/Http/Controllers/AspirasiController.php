@@ -26,4 +26,14 @@ class AspirasiController extends Controller
         return response()->json($aspirasi);
     }
 
+    public function search(Request $request)
+{
+    $search = $request->query('search');
+    $aspirasis = Aspirasi::where('judul_aspirasi', 'LIKE', "%{$search}%")
+        ->orWhere('nik', 'LIKE', "%{$search}%")
+        ->paginate(10);
+
+    return view('aspirasi.index', compact('aspirasis'));
+}
+
 }

@@ -9,6 +9,7 @@ use App\Models\Masyarakat;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -16,6 +17,14 @@ class PengaduanController extends Controller
 {
     public function index(Request $request){
         $query = Pengaduan::with(['jenis', 'masyarakat'])->orderBy('tgl_pengaduan', 'desc');
+
+        // Filter by status
+        if ($request->has('status_pengaduan')) {
+            $statusPengaduan = $request->input('status_pengaduan');
+            if ($statusPengaduan !== 'all') {
+                $query->where('status_pengaduan', $statusPengaduan);
+            }
+        }
 
         // Apply date filters if provided
         if ($request->has('from_date') && $request->has('to_date')) {
@@ -38,7 +47,7 @@ class PengaduanController extends Controller
         return view('pemadaman.list_pemadaman', compact('pemadamans'));*/
     }
 
-    public function filter(Request $request)
+    /*public function filter(Request $request)
     {
         $status_pengaduan = $request->query('status_pengaduan');
 
@@ -55,10 +64,24 @@ class PengaduanController extends Controller
         }
 
         return view('pengaduan.list_pengaduan', compact('pengaduans'));
-    }
+    }*/
 
     // Fungsi untuk mendapatkan nama lokasi dari latitude dan longitude
     private function getLocationName($latitude, $longitude)
+    {
+        $cacheKey = "location_name_{$latitude}_{$longitude}";
+        return Cache::remember($cacheKey, now()->addHours(1), function () use ($latitude, $longitude) {
+            $response = Http::get("https://nominatim.openstreetmap.org/reverse", [
+                'lat' => $latitude,
+                'lon' => $longitude,
+                'format' => 'json',
+            ]);
+
+            $data = $response->json();
+            return $data['display_name'] ?? 'Unknown Location';
+        });
+    }
+    /*private function getLocationName($latitude, $longitude)
     {
         $response = Http::get("https://nominatim.openstreetmap.org/reverse", [
             'lat' => $latitude,
@@ -69,7 +92,7 @@ class PengaduanController extends Controller
         $data = $response->json();
 
         return $data['display_name'] ?? 'Unknown Location';
-    }
+    }*/
 
     public function show($id){
         $pengaduans = Pengaduan::where('id', $id)->first();

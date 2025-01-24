@@ -36,6 +36,7 @@ Route::apiResource('/tanggapans', \App\Http\Controllers\Api\TanggapanController:
 Route::apiResource('/logTanggapans', \App\Http\Controllers\Api\LogTanggapanController::class);
 Route::apiResource('/faqs', \App\Http\Controllers\Api\FaqController::class);
 Route::apiResource('/aspirasis', \App\Http\Controllers\Api\AspirasiController::class);
+Route::apiResource('/ratings', \App\Http\Controllers\Api\RatingController::class);
 
 Route::post('login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [UserController::class, 'logout']);

@@ -193,7 +193,7 @@ use Illuminate\Support\Str;
                         <div class="text-left">
                             <p style="font-size: 24px; font-weight: bold;">{{ $pengaduans_0 }}</p>
                             <p>Pengaduan</p>
-                            <p style="color: #C62828;">Belum Proses</p>
+                            <p style="color: #C62828;"></p>
                         </div>
                         <img alt="Logo" src="assets/media/icons/pengaduan-0-ikon.png" class="h-52px">
                     </div>
@@ -263,10 +263,10 @@ use Illuminate\Support\Str;
                 <div class="card border-0 shadow-sm rounded-md mt-4">
                     <div class="kpi-indicator">
                         <p class="chart-header2">Waktu Rata-Rata Penyelesaian Pengaduan</p>
-                        <p class="status {{ $waktuRataRataPenyelesaian <= 2 ? 'good' : ($waktuRataRataPenyelesaian <= 5 ? 'average' : 'bad') }}">
+                        <p class="status {{ $waktuRataRataPenyelesaian <= 3 ? 'good' : ($waktuRataRataPenyelesaian <= 5 ? 'average' : 'bad') }}">
                             {{ $waktuRataRataPenyelesaian }} hari 
                             <span class="label">
-                                {{ $waktuRataRataPenyelesaian <= 2 ? 'Sangat Baik' : ($waktuRataRataPenyelesaian <= 5 ? 'Standar' : 'Buruk') }}
+                                {{ $waktuRataRataPenyelesaian <= 3 ? 'Sangat Baik' : ($waktuRataRataPenyelesaian <= 5 ? 'Standar' : 'Buruk') }}
                             </span>
                         </p>
                     </div>

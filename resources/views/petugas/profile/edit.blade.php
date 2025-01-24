@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email_petugas" class="control-label">Alamat Email</label>
-                        <input type="email" class="form-control" id="email_petugas" name="email_petugas" value="{{ $petugasa->email_petugas }}">
+                        <input type="email" class="form-control" id="email_petugas" name="email_petugas" value="{{ $petugasa->email }}">
                     </div>
                     <div class="form-group">
                         <label for="telp_petugas" class="control-label">Nomor Telepon</label>

@@ -4,7 +4,7 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">TAMBAH DATA FAQ</h5>
+            <h5 class="modal-title" id="exampleModalLabel">TAMBAH DATA BERITA</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -22,6 +22,8 @@
                     <input type="text" class="form-control" id="jawaban" name="jawaban">
                     <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-jawaban"></div>
                 </div>
+                
+        </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
                 <button type="submit" class="btn btn-primary-berita" id="store">SIMPAN</button>
@@ -44,7 +46,6 @@ $('#store').click(function(e) {
     FormData(document.getElementById("formData"));
     data.append("pertanyaan", $('#pertanyaan').val());
     data.append("jawaban", $('#jawaban').val());
-    
     //ajax
     $.ajax({
         url: '{{ url('api/faqs') }}',
@@ -75,6 +76,8 @@ $('#store').click(function(e) {
             setTimeout(function() {
                 location.reload();
             }, 3000);
+            
+            
 
             //close modal
             $('#modal-create').modal('hide');
@@ -82,20 +85,21 @@ $('#store').click(function(e) {
         
         error:function(error){
             for (const value of data.values()) {
-                console.log(value);
-            }
-            if(error.responseJSON.pertanyaan[0]) {
-                $('#alert-pertanyaan').removeClass('d-none');
-                $('#alert-pertanyaan').addClass('d-block');
-                $('#alert-pertanyaan').html(error.responseJSON.pertanyaan[0]);
+                    console.log(value);
+                }
+                if(error.responseJSON.pertanyaan[0]) {
+                    $('#alert-pertanyaan').removeClass('d-none');
+                    $('#alert-pertanyaan').addClass('d-block');
+                    $('#alert-pertanyaan').html(error.responseJSON.pertanyaan[0]);
 
-            }
-            if(error.responseJSON.jawaban[0]) {
-                $('#alert-jawaban').removeClass('d-none');
-                $('#alert-jawaban').addClass('d-block');
-                $('#alert-jawaban').html(error.responseJSON.jawaban[0]);
+                }
+                if(error.responseJSON.jawaban[0]) {
+                    $('#alert-jawaban').removeClass('d-none');
+                    $('#alert-jawaban').addClass('d-block');
+                    $('#alert-jawaban').html(error.responseJSON.jawaban[0]);
 
-            }
+                }
+                
         }
     });
 });

@@ -4,59 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700')}}">
-    <!--end::Fonts-->
-    <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="{{asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css">
-    <!--end::Page Vendor Stylesheets-->
-    <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css">
-
+    <title>Reset Kata Sandi</title>
     <style>
         body {
-            background-color: #008080;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
 
-        .btn-purple {
-            background-color: #008080;
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             width: 100%;
-            color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            input, button {
+                font-size: 14px;
+                padding: 8px;
+            }
         }
     </style>
-
-    <title>Halaman Masuk Petugas</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <img alt="Logo" src="{{asset('assets/media/logos/foto-login.png')}}" style="margin-top: 18%; margin-left: 12%; height: 500px;">
-            </div>
-            <div class="col-md-6">
-                <div class="card" style="border-radius: 50px; padding: 40px; margin-top: 20%; margin-bottom: 20%; box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);">
-                    <div class="card-body">
-                        <h6 class="text-center text-black" style="margin-bottom: 40px;">Lupa Kata Sandi</h6>
-                        <form method="POST" action="{{ route('password.update') }}">
-                            @csrf
-                            <input type="hidden" name="token" value="{{ $token }}">
-                            <input type="email" name="email" value="{{ $email ?? old('email') }}" required>
-                            <input type="password" name="password" required>
-                            <input type="password" name="password_confirmation" required>
-                            <button type="submit">Reset Kata Sandi</button>
-                        </form>
-                    </div>
-                    @if (Session::has('pesan'))
-                    <div class="alert alert-danger mt-2">
-                        {{ Session::get('pesan') }}
-                    </div>
-                    @endif
-                    
-                </div>
-            </div>
-        </div>
+        <h2>Reset Kata Sandi</h2>
+
+        <form method="POST" action="{{ route('password.update') }}">
+            @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="email" name="email" value="{{ $email ?? old('email') }}" required placeholder="Email">
+            <input type="password" name="password" required placeholder="Kata Sandi Baru">
+            <input type="password" name="password_confirmation" required placeholder="Konfirmasi Kata Sandi">
+            <button type="submit">Reset Kata Sandi</button>
+        </form>
     </div>
+    @if (Session::has('pesan'))
+    <div class="alert alert-danger mt-2">
+    {{ Session::get('pesan') }}
+    </div>
+    @endif
 
 </body>
 

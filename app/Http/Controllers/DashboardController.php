@@ -9,6 +9,7 @@ use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -48,13 +49,15 @@ class DashboardController extends Controller
             ->get();
         
         // Ambil semua data pengaduan
-        $peta_pengaduans = Pengaduan::select('lokasi_pengaduan')->get()->map(function ($pengaduan) {
-            $coordinates = explode(',', $pengaduan->lokasi_pengaduan);
-            return [
-                'latitude' => $coordinates[0],
-                'longitude' => $coordinates[1],
-                'locationName' => $this->getLocationName($coordinates[0], $coordinates[1])
-            ];
+        $peta_pengaduans = Cache::remember('peta_pengaduans', now()->addMinutes(30), function () {
+            return Pengaduan::select('lokasi_pengaduan')->get()->map(function ($pengaduan) {
+                $coordinates = explode(',', $pengaduan->lokasi_pengaduan);
+                return [
+                    'latitude' => $coordinates[0],
+                    'longitude' => $coordinates[1],
+                    'locationName' => $this->getLocationName($coordinates[0], $coordinates[1])
+                ];
+            });
         });
 
         //KPI Rata-Rata Waktu Penyelesaian Pengaduan
@@ -83,6 +86,21 @@ class DashboardController extends Controller
 
     private function getLocationName($latitude, $longitude)
     {
+        $cacheKey = "location_name_{$latitude}_{$longitude}";
+        return Cache::remember($cacheKey, now()->addHours(1), function () use ($latitude, $longitude) {
+            $response = Http::get("https://nominatim.openstreetmap.org/reverse", [
+                'lat' => $latitude,
+                'lon' => $longitude,
+                'format' => 'json',
+            ]);
+
+            $data = $response->json();
+            return $data['display_name'] ?? 'Unknown Location';
+        });
+    }
+
+    /*private function getLocationName($latitude, $longitude)
+    {
         $response = Http::get("https://nominatim.openstreetmap.org/reverse", [
             'lat' => $latitude,
             'lon' => $longitude,
@@ -92,7 +110,7 @@ class DashboardController extends Controller
         $data = $response->json();
 
         return $data['display_name'] ?? 'Unknown Location';
-    }
+    }*/
 
     public function tesnotif()
     {

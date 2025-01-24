@@ -9,6 +9,7 @@ use App\Events\PengaduanBaru;
 class Pengaduan extends Model
 {
     use HasFactory;
+    protected $table = 'pengaduans';
     protected $fillable = [
         'nik',
         'tgl_pengaduan',
@@ -30,6 +31,7 @@ class Pengaduan extends Model
     {
         return $this->hasOne(Jenis::class, 'id', 'id_jenis_aduan');
     }
+    
 
     /*protected $dispatchesEvents = [
         'created' => PengaduanBaru::class,

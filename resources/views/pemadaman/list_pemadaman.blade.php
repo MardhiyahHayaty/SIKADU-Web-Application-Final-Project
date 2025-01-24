@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Ensure jQuery is loaded first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Then Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <style>
     .status-berlangsung,
     .status-selesai,
@@ -76,7 +81,7 @@ use Illuminate\Support\Str;
         <!--begin::Search bar-->
         <div class="col-md-10">
             <div class="form-group">
-                <input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Pemadaman Listrik" style="width: 50%; margin-left: 30px" />
+                <!--<input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Pemadaman Listrik" style="width: 50%; margin-left: 30px" />-->
             </div>
         </div>
         <div class="col-md-2">

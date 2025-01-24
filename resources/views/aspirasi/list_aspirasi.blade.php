@@ -34,7 +34,7 @@ use Illuminate\Support\Str;
         <!--begin::Search bar-->
         <div class="col-md-10">
             <div class="form-group">
-                <input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Aspirasi" style="width: 50%; margin-left: 30px" />
+                <!--<input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Aspirasi" style="width: 50%; margin-left: 30px" />-->
             </div>
         </div>
         <div class="col-md-2">
@@ -145,6 +145,23 @@ use Illuminate\Support\Str;
 
     <script type="text/javascript">
     $(document).ready(function() {
+        $('#search').on('keyup', function() {
+            var query = $(this).val();
+            $.ajax({
+                url: "{{ route('aspirasi.search') }}",
+                type: "GET",
+                data: {'search': query},
+                success: function(data) {
+                    $('#table-aspirasi').html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Pencarian gagal');
+                }
+            });
+        });
+        
+        
         $('#table-aspirasi').on('click', 'tr', function() {
             var aspirasiId = $(this).attr('id').split('_')[1];
 

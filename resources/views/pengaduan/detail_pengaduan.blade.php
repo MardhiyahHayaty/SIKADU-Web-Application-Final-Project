@@ -213,7 +213,7 @@ use Illuminate\Support\Str;
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="control-label">Email</label>
-                                    <input type="email" class="form-control" id="email_masyarakat-edit" value="{{ $pengaduans-> masyarakat -> email_masyarakat }}" style="background-color: #EFF2F5;" readonly>
+                                    <input type="email" class="form-control" id="email_masyarakat-edit" value="{{ $pengaduans-> masyarakat -> email }}" style="background-color: #EFF2F5;" readonly>
                                 </div>
                             </div>
                             

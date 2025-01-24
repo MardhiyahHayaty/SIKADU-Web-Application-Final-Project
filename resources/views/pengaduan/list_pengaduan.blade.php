@@ -116,7 +116,7 @@ use Illuminate\Support\Str;
         <!--begin::Search bar-->
         <div class="col-md-10">
             <div class="form-group">
-                <input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Pengaduan" style="width: 50%; margin-left: 30px" />
+                <!--<input type="search" class="form-control" id="search" name="search" placeholder="Cari Data Pengaduan" style="width: 50%; margin-left: 30px" />-->
             </div>
         </div>
         <div class="col-md-2">
@@ -131,15 +131,17 @@ use Illuminate\Support\Str;
                         <div class="col-md-12">
                             <div class="flex-container">
                                 <div>
-                                    <a href="{{ route('pengaduan.index') }}" class="btn-filter {{ request()->is('pengaduan') ? 'active' : '' }}">Semua</a>
-                                    <a href="{{ route('pengaduan.filter', ['status_pengaduan' => '0']) }}" class="btn-filter {{ request()->query('status_pengaduan') == '0' ? 'active' : '' }}">Belum Proses</a>
-                                    <a href="{{ route('pengaduan.filter', ['status_pengaduan' => 'proses']) }}" class="btn-filter {{ request()->query('status_pengaduan') == 'proses' ? 'active' : '' }}">Proses</a>
-                                    <a href="{{ route('pengaduan.filter', ['status_pengaduan' => 'selesai']) }}" class="btn-filter {{ request()->query('status_pengaduan') == 'selesai' ? 'active' : '' }}">Selesai</a>
-                                    <a href="{{ route('pengaduan.filter', ['status_pengaduan' => 'tolak']) }}" class="btn-filter {{ request()->query('status_pengaduan') == 'tolak' ? 'active' : '' }}">Tolak</a>
+                                    <a href="{{ route('pengaduan.index', ['from_date' => request()->input('from_date'), 'to_date' => request()->input('to_date')]) }}" class="btn-filter {{ !request()->has('status_pengaduan') ? 'active' : '' }}">Semua</a>
+                                    <a href="{{ route('pengaduan.index', ['status_pengaduan' => '0', 'from_date' => request()->input('from_date'), 'to_date' => request()->input('to_date')]) }}" class="btn-filter {{ request()->input('status_pengaduan') == '0' ? 'active' : '' }}">Belum Proses</a>
+                                    <a href="{{ route('pengaduan.index', ['status_pengaduan' => 'proses', 'from_date' => request()->input('from_date'), 'to_date' => request()->input('to_date')]) }}" class="btn-filter {{ request()->input('status_pengaduan') == 'proses' ? 'active' : '' }}">Proses</a>
+                                    <a href="{{ route('pengaduan.index', ['status_pengaduan' => 'selesai', 'from_date' => request()->input('from_date'), 'to_date' => request()->input('to_date')]) }}" class="btn-filter {{ request()->input('status_pengaduan') == 'selesai' ? 'active' : '' }}">Selesai</a>
+                                    <a href="{{ route('pengaduan.index', ['status_pengaduan' => 'tolak', 'from_date' => request()->input('from_date'), 'to_date' => request()->input('to_date')]) }}" class="btn-filter {{ request()->input('status_pengaduan') == 'tolak' ? 'active' : '' }}">Tolak</a>
+
                                 </div>
                                 
                                 <div class="filter-tgl">
                                 <form action="{{ route('pengaduan.index') }}" method="GET">
+                                    <input type="hidden" name="status_pengaduan" value="{{ request()->query('status_pengaduan', 'all') }}">
                                     <div class="flex-container">
                                         <div class="form-group">
                                             <label for="from_date" style="font-size: 12px; margin-bottom: 2px; margin-top: -8px;">Dari Tanggal:</label>
